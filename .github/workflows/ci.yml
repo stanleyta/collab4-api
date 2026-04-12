@@ -10,6 +10,9 @@ jobs:
   build:
     name: Build and Check
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        module: [go-collab4, go-langchaingo]
 
     steps:
     - uses: actions/checkout@v4
@@ -17,10 +20,11 @@ jobs:
     - name: Set up Go
       uses: actions/setup-go@v5
       with:
-        go-version: '1.26.1' # Matching go.mod
+        go-version: '1.26.1'
 
     - name: Verify dependencies
       run: go mod verify
+      working-directory: ${{ matrix.module }}
 
     - name: Check formatting
       run: |
@@ -29,12 +33,16 @@ jobs:
           gofmt -l .
           exit 1
         fi
+      working-directory: ${{ matrix.module }}
 
     - name: Vet
       run: go vet ./...
+      working-directory: ${{ matrix.module }}
 
     - name: Test
       run: go test -v ./...
+      working-directory: ${{ matrix.module }}
 
     - name: Build
       run: go build -v ./...
+      working-directory: ${{ matrix.module }}
