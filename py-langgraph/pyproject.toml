@@ -1,0 +1,19 @@
+[project]
+name = "py-langgraph"
+version = "0.1.0"
+description = "LangGraph Python Example"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "langgraph",
+    "langchain-google-genai",
+    "langchain-anthropic",
+    "langchain-openai",
+    "python-dotenv",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "ruff",
+]
+

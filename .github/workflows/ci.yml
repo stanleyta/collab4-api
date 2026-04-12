@@ -46,3 +46,25 @@ jobs:
     - name: Build
       run: go build -v ./...
       working-directory: ${{ matrix.module }}
+
+  python-check:
+    name: Python Check (py-langgraph)
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install uv
+      run: curl -LsSf https://astral.sh/uv/install.sh | sh
+
+    - name: Set up Python
+      run: uv python install 3.11
+
+    - name: Install dependencies
+      run: uv sync
+      working-directory: py-langgraph
+
+    - name: Lint (ruff)
+      run: uv run ruff check .
+      working-directory: py-langgraph
+      continue-on-error: true
+
