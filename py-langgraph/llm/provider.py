@@ -13,7 +13,7 @@ class LLMProvider:
 
     def _init_llm(self) -> BaseChatModel:
         if self.provider_type == "gemini":
-            model = self.model_name or "gemini-1.5-flash"
+            model = self.model_name or "gemini-2.5-flash"
             return ChatGoogleGenerativeAI(model=model)
         elif self.provider_type == "anthropic":
             model = self.model_name or "claude-3-5-sonnet-20240620"
