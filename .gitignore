@@ -1,0 +1,25 @@
+# Go
+**/bin/
+**/vendor/
+*.exe
+*.test
+*.prof
+
+# Python
+**/__pycache__/
+**/*.py[cod]
+**/*$py.class
+**/.venv/
+**/.env
+**/.ruff_cache/
+**/.pytest_cache/
+**/*.egg-info/
+**/dist/
+**/build/
+
+# IDEs and OS
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*.swo
