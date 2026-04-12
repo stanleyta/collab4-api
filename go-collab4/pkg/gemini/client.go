@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/alpkeskin/gotoon"
-	"radixium.com/collab4-api/internal/contract"
+	"radixium.com/go-collab4/pkg/contract"
 )
 
 // Status constants
@@ -69,10 +69,15 @@ func (c *client) ToTOON(msg *contract.Message) (string, error) {
 	// We unmarshal it here so it gets encoded as native TOON nodes,
 	// rather than an escaped JSON string.
 	var parsedResponse interface{}
-	if err := json.Unmarshal([]byte(msg.Response), &parsedResponse); err == nil {
-		data["response"] = parsedResponse
+	if respStr, ok := msg.Response.(string); ok {
+		if err := json.Unmarshal([]byte(respStr), &parsedResponse); err == nil {
+			data["response"] = parsedResponse
+		} else {
+			// Fallback to raw string if it's not valid JSON (e.g., during some errors)
+			data["response"] = msg.Response
+		}
 	} else {
-		// Fallback to raw string if it's not valid JSON (e.g., during some errors)
+		// If it's already not a string, just pass it along
 		data["response"] = msg.Response
 	}
 

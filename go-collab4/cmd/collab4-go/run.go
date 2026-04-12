@@ -8,8 +8,8 @@ import (
 	"os"
 	"time"
 
-	"radixium.com/collab4-api/internal/contract"
-	"radixium.com/collab4-api/internal/gemini"
+	"radixium.com/go-collab4/pkg/contract"
+	"radixium.com/go-collab4/pkg/gemini"
 )
 
 func main() {

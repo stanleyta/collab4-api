@@ -1,4 +1,4 @@
-module radixium.com/collab4-api
+module radixium.com/go-collab4
 
 go 1.26.1
 

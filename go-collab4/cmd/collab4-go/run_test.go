@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"radixium.com/collab4-api/internal/contract"
+	"radixium.com/go-collab4/pkg/contract"
 )
 
 func TestMessageContract(t *testing.T) {
