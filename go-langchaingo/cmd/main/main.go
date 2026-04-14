@@ -32,7 +32,7 @@ func main() {
 	}
 
 	// Example: Process a prompt
-	response, err := svc.Process(ctx, "Hello, how are you?")
+	response, err := svc.Process(ctx, "Tell me a short joke.")
 	if err != nil {
 		log.Printf("Process failed (expected if no API key or invalid model): %v", err)
 	} else {
