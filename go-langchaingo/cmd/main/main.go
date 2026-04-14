@@ -14,6 +14,7 @@ func main() {
 	// Define flags
 	providerFlag := flag.String("provider", string(llm.Ollama), "LLM provider to use (openai, anthropic, gemini, ollama)")
 	modelFlag := flag.String("model", "llama3", "Specific model name (e.g., gemini-2.5-flash, claude-3-5-sonnet-20240620, llama3)")
+	promptFlag := flag.String("prompt", "Tell me a short joke.", "The prompt to send to the LLM")
 	flag.Parse()
 
 	ctx := context.Background()
@@ -32,7 +33,7 @@ func main() {
 	}
 
 	// Example: Process a prompt
-	response, err := svc.Process(ctx, "Tell me a short joke.")
+	response, err := svc.Process(ctx, *promptFlag)
 	if err != nil {
 		log.Printf("Process failed (expected if no API key or invalid model): %v", err)
 	} else {
