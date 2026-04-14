@@ -12,8 +12,8 @@ import (
 
 func main() {
 	// Define flags
-	providerFlag := flag.String("provider", string(llm.Gemini), "LLM provider to use (openai, anthropic, gemini, ollama)")
-	modelFlag := flag.String("model", "gemini-2.5-flash", "Specific model name (e.g., gemini-2.5-flash, claude-3-5-sonnet-20240620, llama3)")
+	providerFlag := flag.String("provider", string(llm.Ollama), "LLM provider to use (openai, anthropic, gemini, ollama)")
+	modelFlag := flag.String("model", "llama3", "Specific model name (e.g., gemini-2.5-flash, claude-3-5-sonnet-20240620, llama3)")
 	flag.Parse()
 
 	ctx := context.Background()

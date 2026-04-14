@@ -8,7 +8,7 @@ def main():
     load_dotenv()
     
     parser = argparse.ArgumentParser(description="LangGraph Python Example")
-    parser.add_argument("--provider", type=str, default="gemini", choices=["gemini", "anthropic", "openai", "ollama"],
+    parser.add_argument("--provider", type=str, default="ollama", choices=["gemini", "anthropic", "openai", "ollama"],
                         help="LLM provider to use")
     parser.add_argument("--model", type=str, help="Specific model name")
     parser.add_argument("--prompt", type=str, default="Hello, tell me a short joke.", help="The prompt to send")
