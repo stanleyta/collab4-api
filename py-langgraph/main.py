@@ -11,14 +11,14 @@ def main():
     parser.add_argument("--provider", type=str, default="ollama", choices=["gemini", "anthropic", "openai", "ollama"],
                         help="LLM provider to use")
     parser.add_argument("--model", type=str, help="Specific model name")
+    parser.add_argument("--temperature", type=float, default=1.2, help="Temperature for the LLM")
     parser.add_argument("--prompt", type=str, default="Hello, tell me a short joke.", help="The prompt to send")
     
     args = parser.parse_args()
 
-    print(f"Starting LangGraph service with provider: {args.provider}")
-    
     try:
-        provider = LLMProvider(args.provider, args.model)
+        provider = LLMProvider(args.provider, args.model, temperature=args.temperature)
+        print(f"Service initialized. Provider: {args.provider}, Model: {provider.get_model_name()}, Temperature: {args.temperature}")
         service = LangGraphService(provider.get_llm())
         
         print(f"Processing prompt: {args.prompt}")

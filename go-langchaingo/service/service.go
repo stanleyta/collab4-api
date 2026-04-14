@@ -13,12 +13,17 @@ type Service struct {
 }
 
 // NewService creates a new instance of Service with a specific LLM provider and model.
-func NewService(ctx context.Context, pType llm.ProviderType, modelName string) (*Service, error) {
-	provider, err := llm.NewProvider(ctx, pType, modelName)
+func NewService(ctx context.Context, pType llm.ProviderType, modelName string, temperature float64) (*Service, error) {
+	provider, err := llm.NewProvider(ctx, pType, modelName, temperature)
 	if err != nil {
 		return nil, fmt.Errorf("could not initialize llm provider (%s/%s): %w", pType, modelName, err)
 	}
 	return &Service{llmProvider: provider}, nil
+}
+
+// ModelName returns the model name being used by the service.
+func (s *Service) ModelName() string {
+	return s.llmProvider.ModelName()
 }
 
 // Run starts the service logic.
