@@ -3,6 +3,7 @@ from typing import Optional
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_anthropic import ChatAnthropic
 from langchain_openai import ChatOpenAI
+from langchain_ollama import ChatOllama
 from langchain_core.language_models.chat_models import BaseChatModel
 
 class LLMProvider:
@@ -21,6 +22,9 @@ class LLMProvider:
         elif self.provider_type == "openai":
             model = self.model_name or "gpt-4o"
             return ChatOpenAI(model=model)
+        elif self.provider_type == "ollama":
+            model = self.model_name or "llama3"
+            return ChatOllama(model=model)
         else:
             raise ValueError(f"Unsupported provider: {self.provider_type}")
 

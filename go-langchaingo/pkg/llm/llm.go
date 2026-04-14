@@ -7,6 +7,7 @@ import (
 	"github.com/tmc/langchaingo/llms"
 	"github.com/tmc/langchaingo/llms/anthropic"
 	"github.com/tmc/langchaingo/llms/googleai"
+	"github.com/tmc/langchaingo/llms/ollama"
 	"github.com/tmc/langchaingo/llms/openai"
 )
 
@@ -17,6 +18,7 @@ const (
 	OpenAI    ProviderType = "openai"
 	Anthropic ProviderType = "anthropic"
 	Gemini    ProviderType = "gemini"
+	Ollama    ProviderType = "ollama"
 )
 
 // Provider handles LLM operations using langchaingo.
@@ -48,6 +50,14 @@ func NewProvider(ctx context.Context, pType ProviderType, modelName string) (*Pr
 			opts = append(opts, googleai.WithDefaultModel(modelName))
 		}
 		model, err = googleai.New(ctx, opts...)
+	case Ollama:
+		opts := []ollama.Option{}
+		if modelName != "" {
+			opts = append(opts, ollama.WithModel(modelName))
+		} else {
+			opts = append(opts, ollama.WithModel("llama3")) // Default local model
+		}
+		model, err = ollama.New(opts...)
 	default:
 		return nil, fmt.Errorf("unsupported provider type: %s", pType)
 	}
